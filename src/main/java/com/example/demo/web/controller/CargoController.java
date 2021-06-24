@@ -31,20 +31,20 @@ public class CargoController {
 
 	@GetMapping("/cadastrar")
 	public String cadastrar(Cargo cargo) {
-		return "/cargo/cadastro";
+		return "cargo/cadastro";
 	}
 	
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
 		model.addAttribute("cargos", cargoService.buscarTodos());
-		return "/cargo/lista"; 
+		return "cargo/lista"; 
 	}
 	
 	@PostMapping("/salvar")
 	public String salvar(@Valid Cargo cargo, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
-			return "/cargo/cadastro";
+			return "cargo/cadastro";
 		}
 		
 		cargoService.salvar(cargo);
@@ -62,7 +62,7 @@ public class CargoController {
 	public String editar(@Valid Cargo cargo, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
-			return "/cargo/cadastro";
+			return "cargo/cadastro";
 		}	
 		
 		cargoService.editar(cargo);

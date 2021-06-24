@@ -29,7 +29,7 @@ public class Funcionario extends AbstractEntity<Long> {
 	
 	@NotNull
 	@PastOrPresent(message = "{PastOrPresent.funcionario.dataEntrada}")
-	@DateTimeFormat(iso = ISO.DATE)
+	@DateTimeFormat(iso = ISO.DATE, pattern = "")
 	@Column(name= "data_entrada", nullable = false, columnDefinition = "DATE")
 	private LocalDate dataEntrada;
 	
