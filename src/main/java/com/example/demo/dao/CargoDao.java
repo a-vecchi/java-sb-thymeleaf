@@ -3,6 +3,7 @@ package com.example.demo.dao;
 import java.util.List;
 
 import com.example.demo.domain.Cargo;
+import com.example.demo.util.PaginacaoUtil;
 
 public interface CargoDao {
 
@@ -15,4 +16,6 @@ public interface CargoDao {
     Cargo findById(Long id);
 
     List<Cargo> findAll();
+    
+    PaginacaoUtil<Cargo> buscaPaginada(int pagina, String direcao);
 }

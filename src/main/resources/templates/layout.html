@@ -16,7 +16,7 @@
 	<link th:href="@{/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css}" rel="stylesheet" />
 	
 	<!-- Custom styles for this template -->
-	<link th:href="@{/css/style.css}" rel="stylesheet" />
+	<link th:href="@{/css/style.css?v=c1}" rel="stylesheet" />
 </head>
 <body>
 	<header th:replace="fragments/header :: cabecalho">
@@ -51,8 +51,7 @@
 		var url = '';
 		
 		$('button[id*="btn_"]').click(function() {
-			url = "/" + $(this).attr('id').split("_")[1]; 
-			/* DEV url = "http://localhost:8080/" + $(this).attr('id').split("_")[1]; */
+			url = "/" + $(this).attr('id').split("_")[1];
 		});
 		
 		$('#ok_confirm').click(function() {

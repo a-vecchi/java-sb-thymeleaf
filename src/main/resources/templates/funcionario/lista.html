@@ -106,7 +106,8 @@
 		                    <tr th:each="f : ${funcionarios}">
 		                        <td th:text="${f.id}">2</td>
 		                        <td th:text="${f.nome}">Ana Maria Lindoval</td>
-		                        <td th:text="|R$ ${{f.salario}}|">R$ 3.560,70</td>
+		                        <td th:text="|R$ ${{f.salario}}|">R$ 3.560,70</td> 
+<!-- 								<td th:text="${#numbers.formatCurrency(f.salario)}">R$ 3.560,70</td> -->
 		                        <td th:text="${f.cargo.departamento.nome}">Administração</td>
 		                        <td th:text="${f.cargo.nome}">Auxiliar Administrativo</td>
 		                        <td>
