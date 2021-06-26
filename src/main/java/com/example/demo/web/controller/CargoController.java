@@ -26,7 +26,7 @@ import com.example.demo.util.PaginacaoUtil;
 @Controller
 @RequestMapping("/cargos")
 public class CargoController {
-	
+
 	@Autowired
 	private CargoService cargoService;
 	@Autowired
@@ -36,51 +36,58 @@ public class CargoController {
 	public String cadastrar(Cargo cargo) {
 		return "cargo/cadastro";
 	}
-	
+
+	/*
 	@GetMapping("/listar")
-	public String listar(ModelMap model, 
-						 @RequestParam("page") Optional<Integer> page, 
-						 @RequestParam("dir") Optional<String> dir) {
-		
-		int paginaAtual = page.orElse(1);
-		String ordem = dir.orElse("asc");		
-		
-		PaginacaoUtil<Cargo> pageCargo = cargoService.buscarPorPagina(paginaAtual, ordem);
-		
-		model.addAttribute("pageCargo", pageCargo);
+	public String listar(ModelMap model) {
+		model.addAttribute("cargos", cargoService.buscarTodos());
 		return "cargo/lista"; 
 	}
+	*/
 	
+	@GetMapping("/listar")
+	public String listar(ModelMap model, @RequestParam("page") Optional<Integer> page,
+			@RequestParam("dir") Optional<String> dir) {
+
+		int paginaAtual = page.orElse(1);
+		String ordem = dir.orElse("asc");
+
+		PaginacaoUtil<Cargo> pageCargo = cargoService.buscarPorPagina(paginaAtual, ordem);
+
+		model.addAttribute("pageCargo", pageCargo);
+		return "cargo/lista";
+	}
+
 	@PostMapping("/salvar")
 	public String salvar(@Valid Cargo cargo, BindingResult result, RedirectAttributes attr) {
-		
+
 		if (result.hasErrors()) {
 			return "cargo/cadastro";
 		}
-		
+
 		cargoService.salvar(cargo);
 		attr.addFlashAttribute("success", "Cargo inserido com sucesso.");
 		return "redirect:/cargos/cadastrar";
 	}
-	
+
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
 		model.addAttribute("cargo", cargoService.buscarPorId(id));
 		return "cargo/cadastro";
 	}
-	
+
 	@PostMapping("/editar")
 	public String editar(@Valid Cargo cargo, BindingResult result, RedirectAttributes attr) {
-		
+
 		if (result.hasErrors()) {
 			return "cargo/cadastro";
-		}	
-		
+		}
+
 		cargoService.editar(cargo);
 		attr.addFlashAttribute("success", "Registro atualizado com sucesso.");
 		return "redirect:/cargos/cadastrar";
 	}
-	
+
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
 		if (cargoService.cargoTemFuncionarios(id)) {
@@ -91,9 +98,9 @@ public class CargoController {
 		}
 		return "redirect:/cargos/listar";
 	}
-	
+
 	@ModelAttribute("departamentos")
 	public List<Departamento> listaDeDepartamentos() {
 		return departamentoService.buscarTodos();
-	}	
+	}
 }

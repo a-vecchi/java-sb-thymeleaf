@@ -8,42 +8,43 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dao.DepartamentoDao;
 import com.example.demo.domain.Departamento;
+import com.example.demo.util.PaginacaoUtil;
 
 @Service
 public class DepartamentoServiceImpl implements DepartamentoService {
-	
+
 	@Autowired
 	private DepartamentoDao dao;
 
 	@Transactional(readOnly = false)
 	@Override
 	public void salvar(Departamento departamento) {
-		dao.save(departamento);		
+		dao.save(departamento);
 	}
 
 	@Transactional(readOnly = false)
 	@Override
 	public void editar(Departamento departamento) {
-		dao.update(departamento);		
+		dao.update(departamento);
 	}
 
 	@Transactional(readOnly = false)
 	@Override
 	public void excluir(Long id) {
-		dao.delete(id);		
+		dao.delete(id);
 	}
 
 	@Transactional(readOnly = true)
 	@Override
 	public Departamento buscarPorId(Long id) {
-		
+
 		return dao.findById(id);
 	}
 
 	@Transactional(readOnly = true)
 	@Override
 	public List<Departamento> buscarTodos() {
-		
+
 		return dao.findAll();
 	}
 
@@ -55,4 +56,9 @@ public class DepartamentoServiceImpl implements DepartamentoService {
 		return true;
 	}
 
+	@Override
+	public PaginacaoUtil<Departamento> buscarPorPagina(int pagina, String direcao) {
+
+		return dao.buscaPaginada(pagina, direcao);
+	}
 }
