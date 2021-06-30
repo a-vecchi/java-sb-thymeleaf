@@ -13,7 +13,7 @@ public class FuncionarioValidator implements Validator {
 	@Override
 	public boolean supports(Class<?> clazz) {
 		System.out.println("supports: " + Funcionario.class.equals(clazz));
-		return Funcionario.class.equals(clazz) || PaginacaoUtil.class.equals(clazz);
+		return Funcionario.class.equals(clazz);
 	}
 
 	@Override

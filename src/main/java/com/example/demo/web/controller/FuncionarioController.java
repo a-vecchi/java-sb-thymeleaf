@@ -38,9 +38,9 @@ public class FuncionarioController {
 	@Autowired
 	private CargoService cargoService;
 
-	@InitBinder
+	@InitBinder("funcionario")
 	public void initBinder(WebDataBinder binder) {
-		System.out.println(binder.getObjectName()); /*-- ESSE!!!!*/
+		System.out.println(binder.getObjectName()); 
 		binder.addValidators(new FuncionarioValidator());
 	}
 
